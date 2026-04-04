@@ -20,6 +20,8 @@ def findAllClasses() -> dict:
             class_data[class_name] = class_id
     return class_data
 
+def listAllTaskesOfClass
+
 print(findAllClasses())
 
 
