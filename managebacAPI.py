@@ -1,12 +1,12 @@
 import requests
 from bs4 import BeautifulSoup
 cookies = {
-    "_managebac_session": "AXsxyeXTbYMPPxrGQkbVNVGe9e%2BdsoIC0994usS2elgZr5bYcelZBAoBxMJJEFELCJTOHbi%2F%2BcPjdopCAg9%2BB1qL05ITVwECisvtGfOhnNEc0KyfpLVzJpxXVWgqGS%2FF2qP4pfCr71PlBRBCYMPrYGi6nM%2BKz%2F5yxaDx4JxMMh4n%2FWjwn1BGLIEI3NdIkZoodBpNF%2B%2F2OULAfjSianGciM7R4rqY9aIumzae73ANq0%2FKrG5At4%2FnnvyDcW6vIe8DB9SNqCHPFlLe42b40L%2BBUEyM5n%2BHPxPCFQOcJh7rnGOcRk0RAvoAxoXdGfmvx5FKUNeojFSXA0nQl905aOxKJtN06%2Fw3T1dWL2fIXBe1Ewoyrvo%2FsDj8ZBy384xPvToXrIWHYrj72XSLTmglvASBM4lGx1%2FberbuR%2B%2BoNWRVZC7MIwD8fE0hHSLtm%2FD1AOFp234BK1k6VefGZhpke90xyvpbs9q9se0ekup%2BqtqUq%2BRomnvw6kEv1DNQehjIDY6eoYk4d8f6lfgJPi5O%2BMlfXo24xdI3eJ%2BSVotHDvO8vEAWMcutzEwJA5cU3d%2Bacqow%2B8aYS4Yi%2FYtN0by%2BZD4saGYB%2FXuX98f36BZqn4EScKXN3Eg6wttwo%2F2D%2BFnmRC%2Fa7hpt0upf2cw%3D--n50mmSSua5%2FyjEWo--DpIhjWb%2F3cL8phAzo4ZIbQ%3D%3D"
+    "_managebac_session": "%2BECHFGIAoepylNMWbYK6M0bqi5m6WkWRXRAeS8sAD4YqOq8G21Rd5a87Kjt2eCumkx3T%2BumaHrAeEEB6ab%2B0Zq6XQLvONey9FkdBpI5RjYPc540ubUMVNjWk2KUJvtFBXEbCp6okv2fLVNuDqsszQPtnVQpCEzrDWmAlSBl4bYpvtTa%2F4zA8Fdx0QydPSyjJzwemJ4Uy%2FdB6lwCKViVFWqdK3R0XpiunhMB4SxZPyglNssAbFB7S%2BXY9ewaV4MESip96n08leK4HJpjl8aashIjnNF69YM4YoETZT1Wq5ix2yvryCFAVXNuWvyKaIcrGYVts1085dnrcukJofB6GAxz%2BJfhp%2BntZwqI3cEspiEH9%2B2lKm1cIA3sgq0WUbYU%2FqsngrSqmHwQBX7yuTh9Xz7C5ej5A8s3NbmmZnRL%2Byuj8UogGBD33TF5Xsy7D3BcqZu%2FH9%2FMeZTMSLbnJ2ouea9%2B%2BkCnqwO2lQ5gOMAwSe6vM61DDzRfJdN%2FeM1rRhJ5c2tXBTiRj0PwYRHVoMGMNvVtiRI7G%2Bv7or%2F2YrwMTThShwwkUARnpnI2G1gDppHZxrt2Sdj5pLvxmzHyT93Fgt5OQCsKKd5b2j0ez3ZjBof9evuJsV8pJSHKF6dLnoAFfNO2rQ9ulNr4%3D--IvhezyToPg%2BLma8w--21gKQmV0Kg8HB%2BN67UUy6A%3D%3D"
 }
 
 
 
-def findAllClasses() -> dict:
+def listAllClasses() -> dict:
     r = requests.get("https://mingdao.managebac.com/student/classes/page/1", cookies=cookies)
     soup = BeautifulSoup(r.text,'html.parser')
 
@@ -20,9 +20,22 @@ def findAllClasses() -> dict:
             class_data[class_name] = class_id
     return class_data
 
-def listAllTaskesOfClass
+def listAllTaskesOfClass(class_id):
+    # Maybe Incorprate findallclasses here
+    r = requests.get(f"https://mingdao.managebac.com/student/classes/{class_id}/core_tasks", cookies=cookies)
+    soup = BeautifulSoup(r.text,"html.parser")
+    allListItems = soup.find_all('div',class_="fusion-card-item short-assignment section hstack flex-wrap")
+    
+    for listItem in allListItems:
+    print(len(allListItems))
 
-print(findAllClasses())
+
+listAllTaskesOfClass(12781010)
+
+
+
+#
+#{'G10 Chinese Language & Literature (Grade 10) 1002': '12781010', 'G10 English Language and Literature (Grade 10) Brian': '12781208', 'G10 Individuals & Societies (Grade 10) 1002': '12781091', 'G10 Physics (Grade 10) 1002': '12781102', 'G10 Math  (Grade 10) Mark': '12781111', 'G10 Visual Art (Grade 10)': '12781117', 'Personal Project (Grade 10) 1002': '12781137', 'G10 Advance Spanish (Grade 10)': '12780940', 'G10 College Advising (Grade 10) 1002': '12780941', 'G10 Guidance (Grade 10) 1002': '12780943', 'G10 Homeroom Hour (Grade 10) 1002': '12780920', 'G10 Physical Education (Grade 10) Group 1': '12780948'}
 
 
 
