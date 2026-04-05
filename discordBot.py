@@ -35,4 +35,4 @@ async def sayHello(interaction: discord.Interaction):
 async def printer(interaction: discord.Interaction,printer: str):
     await interaction.response.send_message(printer)
 
-client.run('AUTH')
+client.run('<Authorization Token Goes Here>')
