@@ -51,14 +51,18 @@ class managebacAPI:
         r = requests.get(f"https://mingdao.managebac.com/student/classes/{class_id}/core_tasks", cookies=self.cookies)
         soup = BeautifulSoup(r.text,"html.parser") 
         allListItems = soup.find_all('div',class_="fusion-card-item short-assignment section hstack flex-wrap")
-        print(len(allListItems))
+        # print(len(allListItems))
         for listItem in allListItems:
             task_id_get = listItem.find('a')
             check_task_id = ''.join(filter(str.isdigit,task_id_get.get('href').split('/')[-1]))
-            if not task_id == check_task_id:
+            if not str(task_id) == check_task_id.strip():
                 continue
+           
             assessmentSituation = listItem.select_one('.assessment.task-score')
             print(assessmentSituation.get_text(strip=True))
+            print("------------------------------------")
+            
+
 
 
 
@@ -71,7 +75,7 @@ class managebacAPI:
 
 def main():
     testAPI = managebacAPI("1ABiBqXEDjUPvXdGUS0g4N%2FXnDFtFbLBNSBBO0EeN1hsg7Z5YwGUfOk2osCL1mzVH33sKCKfvShDaawHs3PVs1CwutId52ltng9crQ0aRihpQcNfeMMp%2FXP3VGFJ0sFLr8qkQvFDmON0FRHDdsOzGFbseb3sTNYQVxMwsD%2Bo3A7KS9wMFwU8xHFtEePFkXzx8Y5EfyOpSCPJ5hHAQrGS7ccS%2FKkbXcHE0hPmA6EqdpNFPAdiaZz0gX2btZjxr9dYp7ZSGxghNYrDotgxLarLM8aLotq9FBLp81rH2HvH3JQgewONIw%2FH9gp07zqXGG%2BIkxWDpHgTCgXUj%2BjPdP7rT%2FmOhXhEziVVdycxw5x0ipXKb4U7TN7WQToNX%2F92d6BRn4XrFfuSeqRVu%2BjqKJbKVTASCgTLq0WJ6J70l%2BRcXs8bvl5Avg4Nw0fCLo2X8l%2FYDs3uQTTkkhcIrlBkfAWFnn8sUEWPNBUuCUrmJuwh4LLGBySUcG3ndHu%2BCbzvMD4ghstDcg5dLL4tqqRo%2BKCtMq7OioeDm22Kah1IYKINvKqMD3EbpZ%2BIqQexX0pJpG1q08DTOX1%2FKwFHctCsPMHqI67eRija6BgQEKiX6SZNvi0wXZQqRS8%2F5wN5CcjUSd1IHTAUuNGM9u4%3D--H6TNx4rCQcbROKK%2B--C1zUxmnstijdiPKBEbaW%2Bg%3D%3D")
-    print(testAPI.user_info())
+    testAPI.checkTaskScore(12781117,47349877)
 
 if __name__ == "__main__":
     main()

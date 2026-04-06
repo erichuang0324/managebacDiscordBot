@@ -45,5 +45,15 @@ async def auth(interaction: discord.Interaction,auth: str):
     except Exception as e:
         print(e)
 
+class View(discord.ui.View):
+    @discord.ui.button(label="Click me LMAO", style=discord.ButtonStyle.gray)
+    async def button_callback(self,button,interaction):
+        await button.response.send_message("https://media.discordapp.net/attachments/1278908628488949781/1487312702886903808/chloe.gif?ex=69d48ce5&is=69d33b65&hm=bb51289088763aa863bb3d9e42bf84699ec26410eb695ec378e26ca25a4182c2&=&width=1424&height=1216")
+        
 
-client.run('Auth')
+@client.tree.command(name="hmmbutton",description="Cool emoji dispencer", guild=GUILD_ID)
+async def chloebutton(interaction: discord.Interaction):
+    await interaction.response.send_message(view=View())
+    
+    
+client.run(REMOVED')
