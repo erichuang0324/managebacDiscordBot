@@ -56,4 +56,4 @@ async def chloebutton(interaction: discord.Interaction):
     await interaction.response.send_message(view=View())
     
     
-client.run(REMOVED')
+client.run('token')
