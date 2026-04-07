@@ -2,6 +2,11 @@ import discord
 from discord.ext import commands
 from discord import app_commands
 from managebacAPI import managebacAPI
+from dotenv import load_dotenv
+import os
+
+
+load_dotenv()
 class Client(commands.Bot):
     async def on_ready(self):
         
@@ -55,5 +60,8 @@ class View(discord.ui.View):
 async def chloebutton(interaction: discord.Interaction):
     await interaction.response.send_message(view=View())
     
+@client.tree.command(name="checktaskscore",description="Check Task Score", guild=GUILD_ID)
+async def checkTaskScore(interaction: discord.Interaction,test,test2):
+    await interaction.response.send_message(test,test2)
     
-client.run('token')
+client.run(os.getenv("DISCORD_BOT_API"))
