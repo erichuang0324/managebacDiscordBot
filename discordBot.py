@@ -35,12 +35,13 @@ GUILD_ID = discord.Object(id=1489832073383645244)
 
 
 
-@client.tree.command(name="auth", description="Tells you about your managebac Info", guild=GUILD_ID)
+
+@client.tree.command(name="myinfo", description="Tells you about your managebac Info", guild=GUILD_ID)
 async def auth(interaction: discord.Interaction,auth: str):
 
     try:
         api = managebacAPI(auth)
-        outList = api.user_info()
+        outList = api.getUserInfo()
 
         embed = discord.Embed(
             title="Your Info",
