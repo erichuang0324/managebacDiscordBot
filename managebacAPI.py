@@ -55,16 +55,22 @@ class managebacAPI:
         for listItem in allListItems:
             task_id_get = listItem.find('a')
             check_task_id = ''.join(filter(str.isdigit,task_id_get.get('href').split('/')[-1]))
-            if not str(task_id) == check_task_id.strip():
-                continue
-           
-            assessmentSituation = listItem.select_one('.assessment.task-score')
-            print(assessmentSituation.get_text(strip=True))
-            print("------------------------------------")
-            
+            if str(task_id) == check_task_id.strip():
+                assessmentSituation = listItem
+                break
+        
+        if not (assessmentSituation.find('div',class_='cell criterion-grade') == None):
+            print("Assessement is graded Criterion Based")
+        elif not (assessmentSituation.find('span',class_='grade grade-success') == None):
+            print("Assesment is graded with American A score group")
+        else:
+            print("Assessment is either Completition Grade Based, Not submitted or not assessed yet")
+        
 def main():
-    testAPI = managebacAPI("1ABiBqXEDjUPvXdGUS0g4N%2FXnDFtFbLBNSBBO0EeN1hsg7Z5YwGUfOk2osCL1mzVH33sKCKfvShDaawHs3PVs1CwutId52ltng9crQ0aRihpQcNfeMMp%2FXP3VGFJ0sFLr8qkQvFDmON0FRHDdsOzGFbseb3sTNYQVxMwsD%2Bo3A7KS9wMFwU8xHFtEePFkXzx8Y5EfyOpSCPJ5hHAQrGS7ccS%2FKkbXcHE0hPmA6EqdpNFPAdiaZz0gX2btZjxr9dYp7ZSGxghNYrDotgxLarLM8aLotq9FBLp81rH2HvH3JQgewONIw%2FH9gp07zqXGG%2BIkxWDpHgTCgXUj%2BjPdP7rT%2FmOhXhEziVVdycxw5x0ipXKb4U7TN7WQToNX%2F92d6BRn4XrFfuSeqRVu%2BjqKJbKVTASCgTLq0WJ6J70l%2BRcXs8bvl5Avg4Nw0fCLo2X8l%2FYDs3uQTTkkhcIrlBkfAWFnn8sUEWPNBUuCUrmJuwh4LLGBySUcG3ndHu%2BCbzvMD4ghstDcg5dLL4tqqRo%2BKCtMq7OioeDm22Kah1IYKINvKqMD3EbpZ%2BIqQexX0pJpG1q08DTOX1%2FKwFHctCsPMHqI67eRija6BgQEKiX6SZNvi0wXZQqRS8%2F5wN5CcjUSd1IHTAUuNGM9u4%3D--H6TNx4rCQcbROKK%2B--C1zUxmnstijdiPKBEbaW%2Bg%3D%3D")
-    testAPI.checkTaskScore(12781208,47657057)
+    # testAPI = managebacAPI("1ABiBqXEDjUPvXdGUS0g4N%2FXnDFtFbLBNSBBO0EeN1hsg7Z5YwGUfOk2osCL1mzVH33sKCKfvShDaawHs3PVs1CwutId52ltng9crQ0aRihpQcNfeMMp%2FXP3VGFJ0sFLr8qkQvFDmON0FRHDdsOzGFbseb3sTNYQVxMwsD%2Bo3A7KS9wMFwU8xHFtEePFkXzx8Y5EfyOpSCPJ5hHAQrGS7ccS%2FKkbXcHE0hPmA6EqdpNFPAdiaZz0gX2btZjxr9dYp7ZSGxghNYrDotgxLarLM8aLotq9FBLp81rH2HvH3JQgewONIw%2FH9gp07zqXGG%2BIkxWDpHgTCgXUj%2BjPdP7rT%2FmOhXhEziVVdycxw5x0ipXKb4U7TN7WQToNX%2F92d6BRn4XrFfuSeqRVu%2BjqKJbKVTASCgTLq0WJ6J70l%2BRcXs8bvl5Avg4Nw0fCLo2X8l%2FYDs3uQTTkkhcIrlBkfAWFnn8sUEWPNBUuCUrmJuwh4LLGBySUcG3ndHu%2BCbzvMD4ghstDcg5dLL4tqqRo%2BKCtMq7OioeDm22Kah1IYKINvKqMD3EbpZ%2BIqQexX0pJpG1q08DTOX1%2FKwFHctCsPMHqI67eRija6BgQEKiX6SZNvi0wXZQqRS8%2F5wN5CcjUSd1IHTAUuNGM9u4%3D--H6TNx4rCQcbROKK%2B--C1zUxmnstijdiPKBEbaW%2Bg%3D%3D")
+    testAPI = managebacAPI("cShcFSeAf0%2BNBbkfTA6sqIobPjAIfaIMgI9F0kS%2FQ50Wq1%2BRgdwh%2BN%2BMUQh1jffGuRXv9x17qHSGXDLbNMkfqw9HLb8ybqL%2F1GxZA2ATzQpEaL2G6Of%2BEk4IRzVNuYaAHpQqyxf7%2FPVyqd620s6xHULJC5UJvLXG2N5BA206SfhUp%2FKvC7qnwggjZZIn7A%2FUyQEPKH5zXTtzHEGpHPJ8f0Ht3WfuflsFETwpnQ0zK%2BdET2GUvnlFiKfGXZhjPsiZVbHBwUHDUPGkz5gaAnsm6FZzIHSrP7rhJpqeZ%2BfoJ94JAdA665r0tgS0jFWHy5usyRcIhn6godAzfYjy4Iual8uex7GDP9ritIJ05xwr%2BwjnGgd4kbU1Nc9bSWJBzObSihVHvr%2Bt6sW5LKYoYiDqjYfKKiMUNuKHoz61NeANp28ajk7SLGUDSzTvA6G%2FKalEQ8ixO%2F0%2F7C2bWsRHLgpHvM%2FQ2ZWZOHvLb1X8SPw%2BpN%2FfK7LLmZWVpx6OmfGm3oTRBdlrdG8Ft19Og%2BleeJfan8UxvQxd1YWV4a2eNWiDYJeu%2FRRWQU7RQAoWDcQxIAnTrcee%2FykD6LSu8JjZMmp6Mb%2F7UdUeYDthgJIQItxHOEAwjzwXu0LKECsP5VTbL4apJ9bjpB2towU%3D--jMnRqj8CA1GQ9E3W--llYswGs1LhNjlI6PaBsyFA%3D%3D")
+
+    testAPI.checkTaskScore(12780940,47515673)
 
 if __name__ == "__main__":
     main()
