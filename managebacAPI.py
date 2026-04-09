@@ -54,7 +54,7 @@ class managebacAPI:
             task_data[task_name] = task_id
         return task_data
     
-    def getTaskScore(self,class_id,task_id):
+    def getTaskScore(self,class_id,task_id) -> dict:
 
         #Define Stuff
         taskScore = {}
@@ -89,10 +89,20 @@ class managebacAPI:
             
         elif assessmentSituation.find('span',class_='grade grade-success') is not None:
             # Assesment is graded with A or B or C or D
-            taskScore["scoreFormat"] = "American"
-            scoredict = {}
-            
             print("Assesment is graded with American A score group")
+
+            taskScore["scoreFormat"] = "American"
+            scoreDict = {}
+            scoreGroup = assessmentSituation.find('div',class_='cell labels-set')
+            
+            level = assessmentSituation.find('span',class_='grade grade-success').get_text(strip=True)
+            points = assessmentSituation.find('div',class_='points').get_text(strip=True)
+
+
+            scoreDict[level] = points
+            taskScore["score"] = scoreDict
+            return taskScore
+        
         elif assessmentSituation.find('span',class_='cell not-assessed') is not None:
             print("Sadly Assessment is not Assessed Yet")
         else:
@@ -104,7 +114,7 @@ def main():
     # testAPI = managebacAPI("cShcFSeAf0%2BNBbkfTA6sqIobPjAIfaIMgI9F0kS%2FQ50Wq1%2BRgdwh%2BN%2BMUQh1jffGuRXv9x17qHSGXDLbNMkfqw9HLb8ybqL%2F1GxZA2ATzQpEaL2G6Of%2BEk4IRzVNuYaAHpQqyxf7%2FPVyqd620s6xHULJC5UJvLXG2N5BA206SfhUp%2FKvC7qnwggjZZIn7A%2FUyQEPKH5zXTtzHEGpHPJ8f0Ht3WfuflsFETwpnQ0zK%2BdET2GUvnlFiKfGXZhjPsiZVbHBwUHDUPGkz5gaAnsm6FZzIHSrP7rhJpqeZ%2BfoJ94JAdA665r0tgS0jFWHy5usyRcIhn6godAzfYjy4Iual8uex7GDP9ritIJ05xwr%2BwjnGgd4kbU1Nc9bSWJBzObSihVHvr%2Bt6sW5LKYoYiDqjYfKKiMUNuKHoz61NeANp28ajk7SLGUDSzTvA6G%2FKalEQ8ixO%2F0%2F7C2bWsRHLgpHvM%2FQ2ZWZOHvLb1X8SPw%2BpN%2FfK7LLmZWVpx6OmfGm3oTRBdlrdG8Ft19Og%2BleeJfan8UxvQxd1YWV4a2eNWiDYJeu%2FRRWQU7RQAoWDcQxIAnTrcee%2FykD6LSu8JjZMmp6Mb%2F7UdUeYDthgJIQItxHOEAwjzwXu0LKECsP5VTbL4apJ9bjpB2towU%3D--jMnRqj8CA1GQ9E3W--llYswGs1LhNjlI6PaBsyFA%3D%3D")
     #print(testAPI.getUserInfo())
 
-    testAPI.getTaskScore(12781010,47581873)
+    print(testAPI.getTaskScore(12780940,47515673))
 
 if __name__ == "__main__":
     main()
