@@ -74,13 +74,14 @@ class managebacAPI:
 
         # Readability improvement is required -----------
 
-        if not (assessmentSituation.find('div',class_='cell criterion-grade') == None):
+        if assessmentSituation.find('div',class_='cell criterion-grade') is not None:
             # Assessment is graded with criterions
             print("Assessement is graded Criterion Based")
-        elif not (assessmentSituation.find('span',class_='grade grade-success') == None):
+            
+        elif assessmentSituation.find('span',class_='grade grade-success') is not None:
             # Assesment is graded with A or B or C or D
             print("Assesment is graded with American A score group")
-        elif not (assessmentSituation.find('span',class_='cell not-assessed') == None):
+        elif assessmentSituation.find('span',class_='cell not-assessed') is not None:
             print("Sadly Assessment is not Assessed Yet")
         else:
             print("No Score Data It Might be compleition based Or you didn't even submit")
